@@ -1,0 +1,42 @@
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
+
+<h6>refresh to fix stuff :grimaced:</h6> 
+<h2>Events you are invited to: </h2>
+<% if @user.pending_events.any? %>
+<table>
+<thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Date</th>
+      <th>Creator</th>
+    </tr>
+  </thead>
+<tbody>
+    <% @user.pending_events.each do |event| %>
+      <%= form_with url: 'users#update', method: :patch do |f| %>
+      <tr>
+        <td><%= event.title %></td>
+        <td><%= event.description %></td>
+        <td><%= event.date.strftime("%B %d %Y %l:%M%P") %></td>
+        <td><%= event.creator.name %></td>
+      </tr>
+          
+          <td> RSVP <%= f.radio_button('rsvp', 'yes') %> </td>
+          
+          <td> Decline <%= f.radio_button('rsvp', 'no') %> </td>
+          <%= hidden_field_tag 'event_id', event.id %>
+          <td> <%= f.submit :rsvp  %> </td>
+        <% end %>
+      
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+There are no pending invites
+<% end %>
+<br><br> <%= link_to  "Home", events_path %>

@@ -1,0 +1,13 @@
+<h3>New user signup</h3>
+<% if @user.errors.any? %>
+  <div>
+    <% @user.errors.full_messages.each do |message| %>
+      <div> <%= message %> </div>
+    <% end %>
+  </div>
+<% end %>
+<%= form_for @user, url: { action: 'create' } do |f| %>
+  <%= f.label :name, 'Name:' %>
+  <%= f.text_field :name, placeholder: '' %>
+  <%= f.submit 'Submit' %>
+<% end %>

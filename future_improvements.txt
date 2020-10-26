@@ -1,0 +1,5 @@
+CSS Styling
+Organize into past, current and upcoming categories
+Add index for all users view
+Allow for editing of events
+Figure out why we need to refresh to fix RSVP (something about forms in tables)

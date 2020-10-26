@@ -1,0 +1,27 @@
+<%= form_with model: @event do |form| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.label :title, "Title: " %>
+    <%= form.text_field :title, placeholder: "Title" %>
+    <%= form.label :description, "Description: " %>
+    <%= form.text_field :description, placeholder: "Description" %>
+    <%= form.label :date %>
+    <%= form.datetime_select :date %> 
+    <%= form.label 'Select who you want to invite.' %>
+    <% User.all.each do |user| %>
+      <%= user.name %>
+      <%= form.check_box :invitee_list, { multiple: true}, user.id, false %> <br/>
+    <% end %>
+    <%= form.submit %>
+<% end %>

@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>Title: <%= @event.title %> </p>
+<p>Description: <%= @event.description %> </p>
+<p>Date and Time: <%= @event.date.strftime("%B %d %Y %l:%M%P") %> </p>
+<p>Invited List: 
+<% @event.pending.each do |user| %>
+<%= user.name %>, 
+<% end %>
+</p>
+
+<p>RSVP List: 
+<% @event.confirmed.each do |user| %>
+<%= user.name %>, 
+<% end %>
+</p>
+
+<%= link_to 'Home', events_path %>
